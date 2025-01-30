@@ -30,6 +30,7 @@ if(BUILD_TESTING)
     template_lib_obj
     Catch2::Catch2WithMain
   )
+  target_compile_features(template_lib_test PRIVATE cxx_std_23)
   catch_discover_tests(template_lib_test
       WORKING_DIRECTORY ${PROJECT_BINARY_DIR})
 endif()
