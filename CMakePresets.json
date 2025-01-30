@@ -82,10 +82,7 @@
     },
     {
       "name": "release-ci",
-      "inherits": ["release-conan", "test"],
-      "cacheVariables": {
-        "template_DEV": "ON"
-      }
+      "inherits": ["release-conan", "test"]
     }
     ]
 }
