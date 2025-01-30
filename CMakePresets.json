@@ -70,10 +70,19 @@
     },
     {
         "name": "release",
+        "binaryDir": "${sourceDir}/build/rel",
         "inherits": ["base-cfg"],
         "cacheVariables": {
             "CMAKE_BUILD_TYPE": "RelWithDebInfo"
         }
+    },
+    {
+        "name": "release-conan",
+        "inherits": ["release", "conan"]
+    },
+    {
+      "name": "release-ci",
+      "inherits": ["release-conan", "test"]
     }
     ]
 }

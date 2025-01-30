@@ -10,14 +10,13 @@ I took a look at `cmake-init` and modified to my own use:
 
 ## How to use
 
-Modify [this script](./tools/sed.sh), and run it at the project root.
+Modify [this script](tools/sed.sh), and run it at the project root.
 
 ```bash
 sh ./tools/sed.sh
 ```
 
-Modify the `project` section in [the main CMake file](./CMakeLists.txt) to that
-of your project.
+Modify the `project` section in the main CMake file to that of your project.
 
 <!--
     The stuff above this comment should be deleted if you decide to use this
@@ -26,11 +25,11 @@ of your project.
 
 ## Building
 
-See the [BUILDING](BUILDING.md) document.
+See the BUILDING document.
 
 ## Contributing
 
-See the [CONTRIBUTING](CONTRIBUTING.md) document.
+See the CONTRIBUTING document.
 
 ## Licensing
 
