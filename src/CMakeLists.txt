@@ -30,9 +30,13 @@ if(BUILD_TESTING)
   target_link_libraries(template_lib_test
     PRIVATE
     template_lib
+    template_compile_options
     Catch2::Catch2WithMain
   )
-  target_compile_features(template_lib_test PRIVATE cxx_std_23)
+  target_precompile_headers(template_lib_test
+    PRIVATE
+    <catch2/catch_test_macros.hpp>
+  )
   catch_discover_tests(template_lib_test
       WORKING_DIRECTORY ${PROJECT_BINARY_DIR})
 endif()
