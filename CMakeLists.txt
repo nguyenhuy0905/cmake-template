@@ -1,3 +1,4 @@
+include(cmake/no-insource.cmake)
 cmake_minimum_required(VERSION 3.28.0)
 project(template
     VERSION 0.1.0
@@ -9,7 +10,9 @@ include(cmake/top-level.cmake)
 include(cmake/compile-options.cmake)
 include(cmake/folders.cmake)
 
-# library
+# ---- library ----
+
+# target_sources inside the src/ directory
 
 add_library(template_lib)
 target_include_directories(template_lib ${WARNING_GUARD}
@@ -27,4 +30,7 @@ add_subdirectory(src)
 add_subdirectory(tests)
 if(template_DEV)
   include(cmake/docs.cmake)
+endif()
+if(NOT CMAKE_SKIP_INSTALL_RULES)
+  include(cmake/install.cmake)
 endif()
