@@ -18,12 +18,13 @@ sh ./tools/sed.sh
 
 ## Todo
 
-- [x] Package manager (conan).
+- [x] Package manager.
 - [x] At least it compiles.
-- [ ] CI/CD (Windows causing trouble. Need more testing).
-- [ ] Install (technically can install, not tested yet).
+- [x] CI/CD.
+- [x] Doxygen.
+- [ ] Install.
 - [ ] CPack.
-- [x] Licensing (it's a template. Probably just slap Unlicense on).
+- [x] Licensing.
 
 Modify the `project` section in the main CMake file to that of your project.
 
@@ -34,11 +35,11 @@ Modify the `project` section in the main CMake file to that of your project.
 
 ## Building
 
-See the BUILDING document.
+See the [BUILDING](BUILDING.md) document.
 
 ## Contributing
 
-See the CONTRIBUTING document.
+See the [CONTRIBUTING](CONTRIBUTING.md) document.
 
 ## Licensing
 
