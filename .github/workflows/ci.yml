@@ -32,7 +32,7 @@ jobs:
       run: conan profile detect --force
 
     - name: Install deps
-      run: conan install . -s build_type=RelWithDebInfo -b missing
+      run: conan install . -s build_type=RelWithDebInfo -s compiler.cppstd=23 -b missing
 
     - name: Configure
       run: cmake --preset release-ci
@@ -41,5 +41,5 @@ jobs:
       run: cmake --build build/rel --config RelWithDebInfo
 
     - name: Test
-      working-directory: build/rel/src
-      run: ctest --output-on-failure
+      working-directory: build/rel
+      run: ctest --test-dir build/rel --output-on-failure

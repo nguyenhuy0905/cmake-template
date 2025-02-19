@@ -26,6 +26,7 @@ cmake_dependent_option(template_DEV "Enable if you plan to work on this project"
     OFF "PROJECT_IS_TOP_LEVEL" OFF
 )
 
+enable_testing()
 add_subdirectory(src)
 add_subdirectory(tests)
 if(template_DEV)

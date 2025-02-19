@@ -19,8 +19,6 @@ target_link_libraries(template_lib
 if(BUILD_TESTING)
   include(Catch)
 
-  enable_testing()
-
   find_package(Catch2 REQUIRED)
   add_executable(template_lib_test)
   target_sources(template_lib_test
