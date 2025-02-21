@@ -41,5 +41,4 @@ jobs:
       run: cmake --build build/rel --config RelWithDebInfo
 
     - name: Test
-      working-directory: build/rel
       run: ctest --test-dir build/rel --output-on-failure
