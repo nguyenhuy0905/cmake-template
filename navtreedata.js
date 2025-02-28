@@ -25,62 +25,17 @@
 var NAVTREE =
 [
   [ "template", "index.html", [
-    [ "Why", "index.html#autotoc_md5", null ],
-    [ "How to use", "index.html#autotoc_md6", null ],
-    [ "Todo", "index.html#autotoc_md7", null ],
-    [ "Building", "index.html#autotoc_md8", null ],
-    [ "Contributing", "index.html#autotoc_md9", null ],
-    [ "Licensing", "index.html#autotoc_md10", null ],
-    [ "Building", "md_BUILDING.html", null ],
-    [ "CODE_OF_CONDUCT", "md_CODE__OF__CONDUCT.html", null ],
-    [ "Contributing", "md_CONTRIBUTING.html", [
-      [ "Code of conduct", "md_CONTRIBUTING.html#autotoc_md2", null ]
-    ] ],
-    [ "pag_example", "pag_example.html", null ],
-    [ "Maybe-helpful stuff for potential contributors", "md_HACKING.html", null ],
-    [ "Bug List", "bug.html", null ],
-    [ "Topics", "topics.html", "topics" ],
-    [ "Namespaces", "namespaces.html", [
-      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
-      [ "Namespace Members", "namespacemembers.html", [
-        [ "All", "namespacemembers.html", null ],
-        [ "Functions", "namespacemembers_func.html", null ],
-        [ "Variables", "namespacemembers_vars.html", null ]
-      ] ]
-    ] ],
-    [ "Classes", "annotated.html", [
-      [ "Class List", "annotated.html", "annotated_dup" ],
-      [ "Class Index", "classes.html", null ],
-      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
-      [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
-        [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ],
-        [ "Enumerations", "functions_enum.html", null ],
-        [ "Enumerator", "functions_eval.html", null ],
-        [ "Related Symbols", "functions_rela.html", null ]
-      ] ]
-    ] ],
+    [ "GitHub", "index.html#gh", null ],
+    [ "Licensing", "index.html#license", null ],
     [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ],
-      [ "File Members", "globals.html", [
-        [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ],
-        [ "Variables", "globals_vars.html", null ],
-        [ "Typedefs", "globals_type.html", null ],
-        [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ],
-        [ "Macros", "globals_defs.html", null ]
-      ] ]
-    ] ],
-    [ "Examples", "examples.html", "examples" ]
+      [ "File List", "files.html", "files_dup" ]
+    ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"afterdoc_8h.html",
-"relates_8cpp.html#a7ceb7d379a52f7e26418e7a446b4a41a"
+"files.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';
