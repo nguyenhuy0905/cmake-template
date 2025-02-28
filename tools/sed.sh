@@ -8,4 +8,5 @@ newname="myproj"
 
 for file in ${cmake_files}; do
   sed -i "s/template/${newname}/g" "${file}"
+  sed -i "s/TEMPLATE/${newname^^}/g" "${file}"
 done
