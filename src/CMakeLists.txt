@@ -1,18 +1,29 @@
 # ---- library definition ----
 
-target_sources(template_lib
-  PUBLIC
-  FILE_SET template_lib_file_set
-  TYPE HEADERS FILES
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/lib.hpp>
-  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/template/lib.hpp>
-  PRIVATE
-  lib.cpp
-)
-target_link_libraries(template_lib
-  PRIVATE
-  template_compile_options
-)
+if(template_MODULE)
+  target_sources(template_lib_module
+    PUBLIC
+    FILE_SET CXX_MODULES FILES
+    lib.cpp
+  )
+  target_link_libraries(template_lib_module
+    PRIVATE
+    template_compile_options
+  )
+else()
+  target_sources(template_lib
+    PUBLIC
+    FILE_SET HEADERS FILES
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/lib.hpp>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/template/lib.hpp>
+    PRIVATE
+    lib.cpp
+  )
+  target_link_libraries(template_lib
+    PRIVATE
+    template_compile_options
+  )
+endif()
 
 # ---- testing ----
 
@@ -25,12 +36,21 @@ if(BUILD_TESTING)
     PRIVATE
     lib.test.cpp
   )
-  target_link_libraries(template_lib_test
-    PRIVATE
-    template_lib
-    template_compile_options
-    Catch2::Catch2WithMain
-  )
+  if(template_MODULE)
+    target_link_libraries(template_lib_test
+      PRIVATE
+      template_lib_module
+      template_compile_options
+      Catch2::Catch2WithMain
+    )
+  else()
+    target_link_libraries(template_lib_test
+      PRIVATE
+      template_lib
+      template_compile_options
+      Catch2::Catch2WithMain
+    )
+  endif()
   target_precompile_headers(template_lib_test
     PRIVATE
     <catch2/catch_test_macros.hpp>

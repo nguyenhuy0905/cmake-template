@@ -1,12 +1,27 @@
+if(CMAKE_SKIP_INSTALL_RULES)
+  return()
+endif()
+if(template_MODULE)
+  set(template_INSTALLS template_lib_module template_compile_options)
+else()
+  set(template_INSTALLS template_lib template_compile_options)
+endif()
 include(GNUInstallDirs)
-install(TARGETS template_lib template_compile_options
+install(TARGETS ${template_INSTALLS}
   EXPORT templateTargets
-  FILE_SET template_lib_file_set
+  FILE_SET CXX_MODULES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/template
+  FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/template
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/template
 )
+if(EXISTS "${PROJECT_BINARY_DIR}/template_export.h")
+  install(FILES
+    ${PROJECT_BINARY_DIR}/template_export.h
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/template
+  )
+endif()
 install(EXPORT templateTargets
   FILE templateTargets.cmake
   NAMESPACE template::

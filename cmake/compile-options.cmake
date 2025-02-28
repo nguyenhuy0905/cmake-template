@@ -30,7 +30,11 @@ endif()
 
 # ---- sanitizers ----
 cmake_dependent_option(template_ASAN "Whether to link with AddressSanitizer" ON
-  "PROJECT_IS_TOP_LEVEL;NOT template_MSAN;NOT template_TSAN;template_DEV" OFF)
+  "PROJECT_IS_TOP_LEVEL;
+  NOT template_MSAN;
+  NOT template_TSAN;
+  NOT CMAKE_CXX_COMPILER_ID STREQUAL MSVC;
+  template_DEV" OFF)
 set(sanitizer_list "")
 if(template_ASAN)
   list(APPEND sanitizer_list "address")
@@ -38,11 +42,21 @@ endif()
 # MSan, TSan and ASan are mutually exclusive
 # MSan, TSan and UBSan are clang-and-gnu specific
 cmake_dependent_option(template_MSAN "Whether to link with MemorySanitizer" OFF
-  "PROJECT_IS_TOP_LEVEL;NOT template_ASAN;NOT template_TSAN;template_DEV" OFF)
+  "PROJECT_IS_TOP_LEVEL;
+  NOT template_ASAN;
+  NOT template_TSAN;
+  template_DEV;
+  NOT CMAKE_CXX_COMPILER_ID STREQUAL MSVC" OFF)
 cmake_dependent_option(template_TSAN "Whether to link with ThreadSanitizer" OFF
-  "PROJECT_IS_TOP_LEVEL;NOT template_ASAN;NOT template_MSAN;template_DEV" OFF)
+  "PROJECT_IS_TOP_LEVEL;
+  NOT template_ASAN;
+  NOT template_MSAN;
+  template_DEV;
+  NOT CMAKE_CXX_COMPILER_ID STREQUAL MSVC" OFF)
 cmake_dependent_option(template_UBSAN "Whether to link with"
-  "UndefinedBehaviorSanitizer" ON "PROJECT_IS_TOP_LEVEL;template_DEV" OFF)
+  "UndefinedBehaviorSanitizer" ON "PROJECT_IS_TOP_LEVEL;
+  template_DEV;
+  NOT CMAKE_CXX_COMPILER_ID STREQUAL MSVC" OFF)
 if(template_MSAN)
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang"
       OR
@@ -75,13 +89,6 @@ if(template_ASAN OR template_MSAN OR template_TSAN OR template_UBSAN)
     )
     target_link_options(template_compile_options
         INTERFACE "-fsanitize=${sanitizer_opts}")
-  elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(template_compile_options
-      INTERFACE
-      "/fsanitize=${sanitizer_opts}"
-    )
-    target_link_options(template_compile_options
-        INTERFACE "/fsanitize=${sanitizer_opts}")
   endif()
 endif()
 
@@ -95,6 +102,34 @@ if(template_PCH)
   )
 endif()
 
+# ---- modules ----
+
+cmake_dependent_option(template_MODULE "Whether to build using modules" OFF
+  "CMAKE_VERSION VERSION_GREATER_EQUAL 3.28;
+  CMAKE_CXX_STANDARD GREATER_EQUAL 20;
+  CMAKE_GENERATOR STREQUAL Ninja OR
+  CMAKE_GENERATOR MATCHES \"Visual Studio\"" OFF
+)
+cmake_dependent_option(template_IMPORT_STD "Whether to use import std" OFF
+  "CMAKE_CXX_STANDARD GREATER_EQUAL 23;template_MODULE" OFF
+)
+if(template_MODULE)
+  include(GenerateExportHeader)
+  target_compile_definitions(template_compile_options INTERFACE TEMPLATE_MODULE)
+  add_library(template_lib_module)
+  generate_export_header(template_lib_module
+    BASE_NAME template
+    EXPORT_FILE_NAME ${PROJECT_BINARY_DIR}/template_export.h
+  )
+  if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    # otherwise, nasty GCC module bug.
+    # to be honest, even doing the other way doesn't fix it.
+  endif()
+  if(template_IMPORT_STD)
+    target_compile_definitions(template_compile_options INTERFACE TEMPLATE_IMPORT_STD)
+  endif()
+endif()
+
 # ---- coverage ----
 cmake_dependent_option(template_COV "Whether to link with coverage" ON
   "PROJECT_IS_TOP_LEVEL;template_DEV" OFF)
@@ -104,6 +139,6 @@ if(template_COV)
       CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     target_compile_options(template_compile_options INTERFACE --coverage)
     target_link_options(template_compile_options INTERFACE --coverage)
-    target_link_libraries(template_compile_options INTERFACE gcov)
+    include(cmake/coverage.cmake)
   endif()
 endif()
