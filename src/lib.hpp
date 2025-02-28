@@ -1,3 +1,8 @@
+/**
+ * @file lib.hpp
+ * @brief Contains an example declaration.
+ */
+
 #pragma once
 
 namespace lib {
