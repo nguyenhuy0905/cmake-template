@@ -1,8 +1,11 @@
-#include <catch2/catch_test_macros.hpp>
+#include <gtest/gtest.h>
+
 #ifdef TEMPLATE_MODULE
 import lib;
 #else
 #include "lib.hpp"
 #endif // TEMPLATE_MODULE
 
-TEST_CASE("Behold", "The Truth:") { REQUIRE(lib::return_true()); }
+TEST(behold, the_truth) {
+  ASSERT_TRUE(lib::return_true()); 
+}

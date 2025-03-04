@@ -28,9 +28,8 @@ endif()
 # ---- testing ----
 
 if(BUILD_TESTING)
-  include(Catch)
-
-  find_package(Catch2 REQUIRED)
+  include(GoogleTest)
+  find_package(GTest REQUIRED)
   add_executable(template_lib_test)
   target_sources(template_lib_test
     PRIVATE
@@ -48,13 +47,12 @@ if(BUILD_TESTING)
       PRIVATE
       template_lib
       template_compile_options
-      Catch2::Catch2WithMain
+      GTest::gtest_main
     )
   endif()
   target_precompile_headers(template_lib_test
     PRIVATE
-    <catch2/catch_test_macros.hpp>
+    <gtest/gtest.h>
   )
-  catch_discover_tests(template_lib_test
-      WORKING_DIRECTORY ${PROJECT_BINARY_DIR})
+  gtest_discover_tests(template_lib_test)
 endif()
