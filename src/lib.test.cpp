@@ -6,6 +6,6 @@ import lib;
 #include "lib.hpp"
 #endif // TEMPLATE_MODULE
 
-TEST(behold, the_truth) {
-  ASSERT_TRUE(lib::return_true()); 
+TEST(Simply, TheTruth) {
+  ASSERT_TRUE(lib::return_true()) << "return_true is not the truth";
 }
