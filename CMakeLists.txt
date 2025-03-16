@@ -29,15 +29,13 @@ include(cmake/folders.cmake)
 
 # target_sources inside the src/ directory
 
-if(NOT template_MODULE)
-  add_library(template_lib)
-  target_include_directories(template_lib ${WARNING_GUARD}
-    PUBLIC
-    "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>"
-    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
-  )
-  add_library(template::template ALIAS template_lib)
-endif()
+add_library(template_lib)
+target_include_directories(template_lib ${WARNING_GUARD}
+  PUBLIC
+  "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>"
+  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+)
+add_library(template::template ALIAS template_lib)
 
 include(CMakeDependentOption)
 cmake_dependent_option(template_DEV "Enable if you plan to work on this project"

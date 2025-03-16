@@ -1,11 +1,7 @@
 if(CMAKE_SKIP_INSTALL_RULES)
   return()
 endif()
-if(template_MODULE)
-  set(template_INSTALLS template_lib_module template_compile_options)
-else()
-  set(template_INSTALLS template_lib template_compile_options)
-endif()
+set(template_INSTALLS template_lib template_compile_options)
 include(GNUInstallDirs)
 install(TARGETS ${template_INSTALLS}
   EXPORT templateTargets
